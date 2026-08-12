@@ -3,6 +3,9 @@
 ## Status
 Prototype — `/rooms` and `/rukost` working end-to-end against the live
 Supabase backend. Placeholder copy on `/about` and `/contact`.
+**Deployed to Vercel (2026-08-12)**: https://alfa-salam-kost-site.vercel.app,
+browser-verified — `/rooms` renders live per-room availability matching
+Supabase data. Team: `aljuhaeda`.
 
 ## Done
 - Next.js 16 app scaffolded (TypeScript, Tailwind, App Router, `src/`).
@@ -33,13 +36,10 @@ Supabase backend. Placeholder copy on `/about` and `/contact`.
   untested with an actual image.
 - `/about` and `/contact` have placeholder copy only, deliberately not
   fabricated business details.
-- Not deployed anywhere yet (see dashboard repo's PROGRESS.md "Questions
-  for the user" — same Vercel-account blocker applies here).
 - Shares the Supabase project with the dashboard repo (`mmzurbsrpbmfkqufwejd`)
   per the plan's repo layout — this repo owns no schema, dashboard repo does.
 
 ## Next up
 1. Real `/about` and `/contact` copy from the business owner.
-2. Deploy to Vercel (same open question as the dashboard: who drives it).
-3. Upload real room photos to the `room-photos` bucket via the dashboard
+2. Upload real room photos to the `room-photos` bucket via the dashboard
    once it's live, to exercise the `next/image` path for real.
