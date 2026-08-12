@@ -103,6 +103,13 @@ files) once the dashboard redesign is done.
   fabricated business details.
 - Shares the Supabase project with the dashboard repo (`mmzurbsrpbmfkqufwejd`)
   per the plan's repo layout — this repo owns no schema, dashboard repo does.
+- Real Alfa Salam Kost property has ~22 rooms (per user, 2026-08-13); seed
+  data only has 2 Kost rooms + 1 Rukost unit. The `/rooms` page and the
+  "key-tag" redesign mockup (see below) were both built/reviewed against
+  that 3-row fixture — card-grid density and page length at ~22 rows
+  hasn't been sanity-checked. Real room data (numbers, types, rent,
+  gender policy) still needs entering via the dashboard once it's live,
+  or an expanded seed if the user hands over a room list.
 
 ## Next up
 1. `/about` and `/contact` now have real page structure (location,
