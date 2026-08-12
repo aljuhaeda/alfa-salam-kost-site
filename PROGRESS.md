@@ -14,8 +14,19 @@ Supabase data. Team: `aljuhaeda`.
   matching the dashboard; a "No photo" placeholder keeps card height
   consistent since no room has a real photo yet; empty-state message added.
 - `/rukost`: empty-state message added.
-- Done unattended per user request while the advisor tool was overloaded —
-  used my own judgment, worth a normal review pass next session.
+- Contact page: fixed a real bug caught in the code-review pass — the
+  WhatsApp `[FILL IN]` placeholder was rendering as a live, clickable
+  `wa.me` link with a nonsensical URL instead of plain placeholder text
+  like the other unfilled sections.
+- Done unattended per user request. Ran the full close-out sequence
+  (code-reviewer → security-review → simplify → verification-before-
+  completion) against the diff once advisor came back online. The
+  simplify pass's findings applied to the dashboard repo didn't carry
+  over here — this repo's own `STATUS_CLASS` map is a single definition,
+  not duplicated within this repo. Browser-verified `/rooms` against live
+  data (nav highlighting, badges, "No photo" placeholders all correct),
+  and confirmed via the compiled CSS that `sm:flex-row` etc. are actually
+  present in the `(min-width: 40rem)` media query.
 
 ## Done
 - Next.js 16 app scaffolded (TypeScript, Tailwind, App Router, `src/`).
