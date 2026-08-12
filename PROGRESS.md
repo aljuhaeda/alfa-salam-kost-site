@@ -7,6 +7,50 @@ Supabase backend. Placeholder copy on `/about` and `/contact`.
 browser-verified — `/rooms` renders live per-room availability matching
 Supabase data. Team: `aljuhaeda`.
 
+## Deferred — site visual redesign plan (not yet implemented)
+User asked for a distinguished visual identity for both the dashboard and
+this site, deliberately different from each other. **The dashboard is
+being redesigned first** (see its own PROGRESS.md for that in-progress
+plan) — pick this up after that one's done. No code touched yet.
+
+**Grounding**: renters browsing rooms on their phone, in daylight, looking
+for a home they can trust. Signature element: the numbered key tag every
+kost hands out at the front desk — a real, specific object from this
+world, not a generic motif.
+
+**Palette** (light-primary — deliberate asymmetry vs. the dashboard being
+dark-primary; renters browse in daylight, not the dashboard's indoor-staff
+use case). Chosen to avoid the AI-cliché cream+serif+terracotta recipe:
+| Token | Hex | Role |
+|---|---|---|
+| Paper | `#F3EEE2` | background — warm unbleached cotton, not stark cream |
+| Ink | `#2B2620` | primary text |
+| Teratai Green | `#3F5D4E` | primary accent, named for lotus ponds in Indonesian courtyards |
+| Marigold | `#D98E2F` | key-tag gold, secondary accent |
+| Clay | `#B5573B` | "occupied" state, instead of generic amber |
+| Rattan | `#C9BFA6` | borders/dividers |
+Dark counterpart: Ink-night `#1C1A16`, Paper-night `#EDE6D6`, brightened
+Teratai/Marigold/Clay for contrast.
+
+**Type**: Fraunces (display, hero only — warm handcrafted serif, not the
+generic high-contrast cliché) + Work Sans (body) + IBM Plex Mono (prices/
+dates — gives room prices a "printed tag" feel, same utility face as the
+dashboard for family resemblance without matching identities).
+
+**Layout/signature**: hero built around a literal hanging key-tag graphic
+threading the headline; room cards show the room number as a real key-tag
+badge (replacing the current plain pill); section dividers use a dashed
+"string" line instead of a hairline.
+
+**Cost tiers**: palette + type = token-only (`globals.css` + `layout.tsx`
+font swap, cheap). Key-tag badges on `/rooms` and the hero = component-
+level (moderate). Postcard photo frames / dashed dividers = optional
+polish, easy to defer or drop.
+
+**Next step**: refine this written spec (same process as the dashboard —
+discuss, adjust, then build a static Artifact mockup before touching real
+files) once the dashboard redesign is done.
+
 ## Done — UI/UX pass (this session)
 - Active nav-link highlighting (`NavLinks` client component, `usePathname`).
 - `/rooms`: cards stack vertically below `sm` instead of cramping
