@@ -21,9 +21,9 @@ const STATUS_LABEL: Record<PublicRoom["availability"], string> = {
 };
 
 const STATUS_CLASS: Record<PublicRoom["availability"], string> = {
-  available: "text-green-600",
-  maintenance: "text-amber-600",
-  occupied: "text-zinc-400",
+  available: "bg-green-600/10 text-green-700 dark:text-green-400",
+  maintenance: "bg-amber-600/10 text-amber-700 dark:text-amber-400",
+  occupied: "bg-zinc-500/10 text-zinc-500 dark:text-zinc-400",
 };
 
 const GENDER_LABEL: Record<PublicRoom["gender_policy"], string> = {
@@ -52,6 +52,10 @@ export default async function RoomsPage() {
         Room Availability
       </h1>
 
+      {rooms.length === 0 && (
+        <p className="text-zinc-500">No rooms listed right now — check back soon.</p>
+      )}
+
       {[...byProperty.entries()].map(([property, list]) => (
         <section key={property} className="flex flex-col gap-4">
           <h2 className="text-lg font-medium text-black dark:text-zinc-50">
@@ -61,16 +65,20 @@ export default async function RoomsPage() {
             {list.map((r) => (
               <li
                 key={r.room_number}
-                className="flex items-center gap-4 rounded border border-black/10 p-4 dark:border-white/10"
+                className="flex flex-col gap-4 rounded border border-black/10 p-4 sm:flex-row sm:items-center dark:border-white/10"
               >
-                {r.photo_url && (
+                {r.photo_url ? (
                   <Image
                     src={r.photo_url}
                     alt={`Room ${r.room_number}`}
                     width={80}
                     height={80}
-                    className="rounded object-cover"
+                    className="h-20 w-20 shrink-0 self-start rounded object-cover"
                   />
+                ) : (
+                  <div className="flex h-20 w-20 shrink-0 items-center justify-center self-start rounded bg-black/5 text-xs text-zinc-400 dark:bg-white/5">
+                    No photo
+                  </div>
                 )}
                 <div className="flex flex-1 flex-col gap-1">
                   <span className="font-medium text-black dark:text-zinc-50">
@@ -86,7 +94,9 @@ export default async function RoomsPage() {
                     {GENDER_LABEL[r.gender_policy]}
                   </span>
                 </div>
-                <span className={`text-sm font-medium ${STATUS_CLASS[r.availability]}`}>
+                <span
+                  className={`self-start rounded px-2 py-0.5 text-xs font-medium sm:self-center ${STATUS_CLASS[r.availability]}`}
+                >
                   {STATUS_LABEL[r.availability]}
                 </span>
               </li>

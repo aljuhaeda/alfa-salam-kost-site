@@ -33,6 +33,10 @@ export default async function RukostPage() {
         different from our women-only Kost rooms.
       </p>
 
+      {rukost.length === 0 && (
+        <p className="text-zinc-500">No listing available right now — check back soon.</p>
+      )}
+
       <ul className="flex flex-col gap-3">
         {rukost.map((r) => (
           <li
