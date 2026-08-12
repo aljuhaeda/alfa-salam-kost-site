@@ -40,6 +40,9 @@ Supabase data. Team: `aljuhaeda`.
   per the plan's repo layout — this repo owns no schema, dashboard repo does.
 
 ## Next up
-1. Real `/about` and `/contact` copy from the business owner.
+1. `/about` and `/contact` now have real page structure (location,
+   facilities, house rules, WhatsApp link, address) with `[FILL IN]`
+   markers instead of one placeholder blurb — still needs the actual
+   business owner details dropped in.
 2. Upload real room photos to the `room-photos` bucket via the dashboard
    once it's live, to exercise the `next/image` path for real.
