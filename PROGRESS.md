@@ -7,6 +7,16 @@ Supabase backend. Placeholder copy on `/about` and `/contact`.
 browser-verified — `/rooms` renders live per-room availability matching
 Supabase data. Team: `aljuhaeda`.
 
+## Done — UI/UX pass (this session)
+- Active nav-link highlighting (`NavLinks` client component, `usePathname`).
+- `/rooms`: cards stack vertically below `sm` instead of cramping
+  image+text+status into one row on a phone; status is now a colored badge
+  matching the dashboard; a "No photo" placeholder keeps card height
+  consistent since no room has a real photo yet; empty-state message added.
+- `/rukost`: empty-state message added.
+- Done unattended per user request while the advisor tool was overloaded —
+  used my own judgment, worth a normal review pass next session.
+
 ## Done
 - Next.js 16 app scaffolded (TypeScript, Tailwind, App Router, `src/`).
   `@supabase/supabase-js` only — no `@supabase/ssr`, since this site has no
