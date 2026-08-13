@@ -1,11 +1,21 @@
 # Alfa Salam Kost Site — Progress
 
 ## Status
-Prototype — `/rooms` and `/rukost` working end-to-end against the live
-Supabase backend. Placeholder copy on `/about` and `/contact`.
-**Deployed to Vercel (2026-08-12)**: https://alfa-salam-kost-site.vercel.app,
-browser-verified — `/rooms` renders live per-room availability matching
-Supabase data. Team: `aljuhaeda`.
+`/rooms` and `/rukost` working end-to-end against the live Supabase
+backend. `/about` and `/contact` now have real copy (2026-08-13) — no
+more placeholders. **Deployed to Vercel (2026-08-12)**:
+https://alfa-salam-kost-site.vercel.app, browser-verified — `/rooms`
+renders live per-room availability matching Supabase data. Team:
+`aljuhaeda`.
+
+## Done — real About/Contact copy (2026-08-13)
+Replaced all `[FILL IN]` markers with real business details from the
+owner: address (Perumahan Andhika Residence, Jl. Nurul Yaqin No. B8,
+Cibinong, Bogor), two WhatsApp contacts (Bu Atin + owner) as `wa.me`
+links, a facilities list, house rules (women-only — no male guests past
+the entrance), and an About blurb. `npm run build`/`eslint` clean.
+Pushed. Not yet redeployed-and-browser-verified live (push should
+trigger Vercel auto-deploy if connected, not confirmed this session).
 
 ## Done — key-tag visual redesign (2026-08-13)
 Implemented the spec below in full: tokens (`globals.css`), font swap
@@ -126,9 +136,7 @@ files) once the dashboard redesign is done.
   or an expanded seed if the user hands over a room list.
 
 ## Next up
-1. `/about` and `/contact` now have real page structure (location,
-   facilities, house rules, WhatsApp link, address) with `[FILL IN]`
-   markers instead of one placeholder blurb — still needs the actual
-   business owner details dropped in.
-2. Upload real room photos to the `room-photos` bucket via the dashboard
+1. Upload real room photos to the `room-photos` bucket via the dashboard
    once it's live, to exercise the `next/image` path for real.
+2. Real ~22-room data entry via the dashboard (seed still only has 2 Kost
+   rooms + 1 Rukost unit).
