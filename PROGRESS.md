@@ -20,16 +20,17 @@ and Contact → Address. `npm run build`/`eslint` clean. Pushed and
 by browsing the redeployed `/rooms` page directly (see redesign entry
 below).
 
-## Done — 20 placeholder rooms added (2026-08-13)
-Real Alfa Salam Kost has ~22 rooms; live Supabase data only had 2
-(101, 102) plus the Rukost whole-house unit. Inserted 20 placeholder
-rooms (room_number 103–122, `standard`, `available`, same Rp800,000 rent
-as the existing two, `women_only`, description "Placeholder room — real
-number, type, and rent pending") directly via the Supabase SQL editor,
-bringing the Kost property to 22 rooms total — a stand-in until the
-owner hands over real room numbers/types/rent. Confirmed live on
-`/rooms` (Room 103 with placeholder description visible). Real data
-entry is still `## Next up` item 2.
+## Done — 23 placeholder rooms, corrected numbering (2026-08-13)
+Real Alfa Salam Kost room numbering is 1–22 but skips the unlucky 13,
+using 12a/12b in its place instead (owner-supplied correction) — 23
+physical rooms, not 22. First pass inserted 20 filler rooms as
+103–122 (wrong scheme, matching the original 101/102 seed style);
+corrected by deleting all Kost rooms (confirmed zero tenants attached
+first) and reinserting 23 rows numbered 1–12, 12a, 12b, 14–22, all
+`standard`/`available`/Rp800,000/`women_only`/placeholder description,
+directly via the Supabase SQL editor. Confirmed live on `/rooms` (Room 1
+renders with the placeholder description). Real room
+numbers/types/rent still pending from the owner — `## Next up` item 2.
 
 ## Done — key-tag visual redesign (2026-08-13)
 Implemented the spec below in full: tokens (`globals.css`), font swap
@@ -151,6 +152,7 @@ files) once the dashboard redesign is done.
 
 ## Next up
 1. Upload real room photos to the `room-photos` bucket via the dashboard
-   once it's live, to exercise the `next/image` path for real.
-2. Replace the 20 placeholder rooms (103–122) with real room
-   numbers/types/rent via the dashboard, once the owner has the list.
+   once it's live — owner confirmed photos are coming soon (2026-08-13).
+2. Replace the 23 placeholder rooms (1–12, 12a, 12b, 14–22) with real
+   room numbers/types/rent via the dashboard, once the owner has the
+   list.
