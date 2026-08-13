@@ -7,7 +7,21 @@ Supabase backend. Placeholder copy on `/about` and `/contact`.
 browser-verified — `/rooms` renders live per-room availability matching
 Supabase data. Team: `aljuhaeda`.
 
-## Deferred — site visual redesign plan (not yet implemented)
+## Done — key-tag visual redesign (2026-08-13)
+Implemented the spec below in full: tokens (`globals.css`), font swap
+(`layout.tsx`, Fraunces/Work Sans/IBM Plex Mono via `next/font/google`),
+`key-tag.tsx` (reusable badge — hero, `/rooms` cards, `/rukost` listing),
+dashed `string-divider` between property sections on `/rooms` and between
+`/about` sections. Kept the hero simple — a KeyTag badge next to the
+headline, not a literal threaded-through-text illustration (higher CSS
+cost, uncertain payoff for a first pass). `npm run build` and `eslint`
+both clean; verified via local dev server + rendered HTML/CSS (no browser
+extension available this session) that tokens/classes apply correctly and
+no old black/zinc classes were left behind. Pushed to `origin/master`.
+`/about` and `/contact` copy is still `[FILL IN]` — spec below is the
+historical plan this implements, kept for reference.
+
+## Deferred — site visual redesign plan (implemented above, 2026-08-13)
 User asked for a distinguished visual identity for both the dashboard and
 this site, deliberately different from each other. **The dashboard is
 being redesigned first** (see its own PROGRESS.md for that in-progress
