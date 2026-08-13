@@ -8,14 +8,28 @@ https://alfa-salam-kost-site.vercel.app, browser-verified — `/rooms`
 renders live per-room availability matching Supabase data. Team:
 `aljuhaeda`.
 
-## Done — real About/Contact copy (2026-08-13)
+## Done — real About/Contact copy + Google Maps link (2026-08-13)
 Replaced all `[FILL IN]` markers with real business details from the
 owner: address (Perumahan Andhika Residence, Jl. Nurul Yaqin No. B8,
 Cibinong, Bogor), two WhatsApp contacts (Bu Atin + owner) as `wa.me`
 links, a facilities list, house rules (women-only — no male guests past
-the entrance), and an About blurb. `npm run build`/`eslint` clean.
-Pushed. Not yet redeployed-and-browser-verified live (push should
-trigger Vercel auto-deploy if connected, not confirmed this session).
+the entrance), and an About blurb. Added a "View on Google Maps" link
+(owner-supplied `maps.app.goo.gl` short link) to both About → Location
+and Contact → Address. `npm run build`/`eslint` clean. Pushed and
+**confirmed live** — Vercel auto-deploy is wired to this repo, verified
+by browsing the redeployed `/rooms` page directly (see redesign entry
+below).
+
+## Done — 20 placeholder rooms added (2026-08-13)
+Real Alfa Salam Kost has ~22 rooms; live Supabase data only had 2
+(101, 102) plus the Rukost whole-house unit. Inserted 20 placeholder
+rooms (room_number 103–122, `standard`, `available`, same Rp800,000 rent
+as the existing two, `women_only`, description "Placeholder room — real
+number, type, and rent pending") directly via the Supabase SQL editor,
+bringing the Kost property to 22 rooms total — a stand-in until the
+owner hands over real room numbers/types/rent. Confirmed live on
+`/rooms` (Room 103 with placeholder description visible). Real data
+entry is still `## Next up` item 2.
 
 ## Done — key-tag visual redesign (2026-08-13)
 Implemented the spec below in full: tokens (`globals.css`), font swap
@@ -138,5 +152,5 @@ files) once the dashboard redesign is done.
 ## Next up
 1. Upload real room photos to the `room-photos` bucket via the dashboard
    once it's live, to exercise the `next/image` path for real.
-2. Real ~22-room data entry via the dashboard (seed still only has 2 Kost
-   rooms + 1 Rukost unit).
+2. Replace the 20 placeholder rooms (103–122) with real room
+   numbers/types/rent via the dashboard, once the owner has the list.
