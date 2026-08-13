@@ -15,7 +15,7 @@ export default function NavLinks() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-4 overflow-x-auto text-sm text-zinc-600 dark:text-zinc-400">
+    <nav className="flex gap-4 overflow-x-auto text-sm">
       {NAV.map((item) => {
         const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
         return (
@@ -24,8 +24,8 @@ export default function NavLinks() {
             href={item.href}
             className={`whitespace-nowrap pb-1 ${
               active
-                ? "border-b-2 border-black font-medium text-black dark:border-white dark:text-zinc-50"
-                : "border-b-2 border-transparent hover:underline"
+                ? "border-b-2 border-teratai font-medium"
+                : "border-b-2 border-transparent opacity-70 hover:underline hover:opacity-100"
             }`}
           >
             {item.label}
