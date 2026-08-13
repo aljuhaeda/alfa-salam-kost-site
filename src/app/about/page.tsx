@@ -11,6 +11,12 @@ export default function AboutPage() {
           just minutes from GOR Pakansari and Cibinong&apos;s main
           shopping/dining strip.
         </p>
+        <a
+          href="https://maps.app.goo.gl/MQBGqnYfbb9m3Ei87"
+          className="text-teratai underline"
+        >
+          View on Google Maps
+        </a>
       </section>
 
       <section className="string-divider flex flex-col gap-1 pt-6">

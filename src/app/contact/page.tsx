@@ -27,6 +27,12 @@ export default function ContactPage() {
           Perumahan Andhika Residence, Jl. Nurul Yaqin No. B8, Tengah, Kec.
           Cibinong, Kabupaten Bogor, Jawa Barat 16914
         </p>
+        <a
+          href="https://maps.app.goo.gl/MQBGqnYfbb9m3Ei87"
+          className="text-teratai underline"
+        >
+          View on Google Maps
+        </a>
       </section>
     </div>
   );
