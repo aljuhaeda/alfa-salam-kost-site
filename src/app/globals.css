@@ -1,30 +1,44 @@
 @import "tailwindcss";
 
+/* Tailwind v4's stock `dark:` follows prefers-color-scheme; this repoints
+   it at the .dark class the theme toggle sets. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Light-primary is deliberate — renters browse in daylight, on their
-   phone, the opposite of the dashboard's dark indoor-staff use case. */
+   phone, the opposite of the dashboard's dark indoor-staff use case.
+   Dark mode is opt-in via a `.dark` class on <html>, set before first
+   paint by the inline script in layout.tsx. That script also resolves
+   `prefers-color-scheme`, so there is deliberately no media query here —
+   one mechanism, so an explicit "light" choice always beats system dark. */
 :root {
+  color-scheme: light;
   --background: #F3EEE2;
   --foreground: #2B2620;
+  /* Pre-blended 70% foreground-on-background: 5.2:1, passes AA.
+     Replaces the old scattered opacity-60/70/80 on body copy, where
+     opacity-60 measured 3.9:1 and failed. */
+  --muted: #67625A;
   --teratai: #3F5D4E;
   --marigold: #D98E2F;
   --clay: #B5573B;
   --rattan: #C9BFA6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1C1A16;
-    --foreground: #EDE6D6;
-    --teratai: #5B8871;
-    --marigold: #E8A83F;
-    --clay: #D06E4E;
-    --rattan: #4A4436;
-  }
+.dark {
+  color-scheme: dark;
+  --background: #1C1A16;
+  --foreground: #EDE6D6;
+  --muted: #AEA99C;
+  --teratai: #5B8871;
+  --marigold: #E8A83F;
+  --clay: #D06E4E;
+  --rattan: #4A4436;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
   --color-teratai: var(--teratai);
   --color-marigold: var(--marigold);
   --color-clay: var(--clay);
@@ -38,6 +52,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* The browser default outline is nearly invisible on Paper. One global
+   rule covers every link, button and toggle on the site. */
+:focus-visible {
+  outline: 2px solid var(--teratai);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .string-divider {
