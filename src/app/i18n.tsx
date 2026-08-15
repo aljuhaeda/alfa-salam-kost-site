@@ -21,6 +21,8 @@ const id = {
   "home.sub":
     "Kamar kost nyaman dan satu unit rukost, tersedia sekarang di Cibinong, Bogor.",
   "home.cta": "Lihat ketersediaan kamar",
+  "home.available": "kamar kost tersedia sekarang",
+  "home.moreAbout": "Lihat detail lengkap →",
 
   "rooms.title": "Ketersediaan Kamar",
   "rooms.empty": "Belum ada kamar yang terdaftar — cek lagi nanti.",
@@ -82,6 +84,8 @@ const en: Record<keyof typeof id, string> = {
   "home.sub":
     "Comfortable boarding rooms and a rukost unit, available now in Cibinong, Bogor.",
   "home.cta": "See room availability",
+  "home.available": "kost rooms available now",
+  "home.moreAbout": "See full details →",
 
   "rooms.title": "Room Availability",
   "rooms.empty": "No rooms listed right now — check back soon.",
