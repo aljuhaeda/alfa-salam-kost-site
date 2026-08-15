@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import KeyTag from "../key-tag";
+import StatusBadge, { type Availability } from "../status-badge";
+import T from "../i18n";
 
 export const revalidate = 60;
 
@@ -11,26 +13,8 @@ type PublicRoom = {
   rent_price: number;
   photo_url: string | null;
   description: string | null;
-  availability: "available" | "maintenance" | "occupied";
+  availability: Availability;
   gender_policy: "women_only" | "men_only" | "mixed";
-};
-
-const STATUS_LABEL: Record<PublicRoom["availability"], string> = {
-  available: "Available",
-  maintenance: "Under maintenance",
-  occupied: "Occupied",
-};
-
-const STATUS_CLASS: Record<PublicRoom["availability"], string> = {
-  available: "bg-teratai/10 text-teratai",
-  maintenance: "bg-marigold/10 text-marigold",
-  occupied: "bg-clay/10 text-clay",
-};
-
-const GENDER_LABEL: Record<PublicRoom["gender_policy"], string> = {
-  women_only: "Women only",
-  men_only: "Men only",
-  mixed: "Mixed / family",
 };
 
 export default async function RoomsPage() {
@@ -48,11 +32,15 @@ export default async function RoomsPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-12">
-      <h1 className="font-display text-3xl font-medium">Room Availability</h1>
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-6 py-12 sm:py-16">
+      <h1 className="font-display text-3xl font-medium sm:text-4xl">
+        <T k="rooms.title" />
+      </h1>
 
       {rooms.length === 0 && (
-        <p className="opacity-70">No rooms listed right now — check back soon.</p>
+        <p className="text-muted">
+          <T k="rooms.empty" />
+        </p>
       )}
 
       {[...byProperty.entries()].map(([property, list], i) => (
@@ -65,7 +53,7 @@ export default async function RoomsPage() {
             {list.map((r) => (
               <li
                 key={r.room_number}
-                className="flex flex-col gap-4 rounded-lg border border-rattan p-4 sm:flex-row sm:items-center"
+                className="flex flex-col gap-4 rounded-lg border border-rattan p-4 transition-colors hover:border-teratai sm:flex-row sm:items-center"
               >
                 {r.photo_url ? (
                   <Image
@@ -76,31 +64,33 @@ export default async function RoomsPage() {
                     className="h-20 w-20 shrink-0 self-start rounded object-cover"
                   />
                 ) : (
-                  <div className="flex h-20 w-20 shrink-0 items-center justify-center self-start rounded bg-rattan/20 text-xs opacity-60">
-                    No photo
+                  <div
+                    className="flex h-20 w-20 shrink-0 items-center justify-center self-start rounded bg-rattan/25 text-xs text-muted"
+                  >
+                    <T k="rooms.noPhoto" />
                   </div>
                 )}
-                <div className="flex flex-1 flex-col gap-1">
-                  <span className="font-medium">
-                    {r.room_type} — Room {r.room_number}
-                  </span>
+                <div className="flex min-w-0 flex-1 flex-col gap-1">
+                  <h3 className="font-medium">
+                    <span className="capitalize">
+                      {r.room_type.replace("_", " ")}
+                    </span>{" "}
+                    — <T k="rooms.room" /> {r.room_number}
+                  </h3>
+                  <p className="font-mono text-sm">
+                    Rp{r.rent_price.toLocaleString("id-ID")}
+                    <T k="rooms.perMonth" />
+                  </p>
                   {r.description && (
-                    <span className="text-sm opacity-70">{r.description}</span>
+                    <p className="text-sm text-muted">{r.description}</p>
                   )}
-                  <span className="font-mono text-sm opacity-70">
-                    Rp{r.rent_price.toLocaleString("id-ID")}/month
-                  </span>
-                  <span className="text-sm opacity-70">
-                    {GENDER_LABEL[r.gender_policy]}
-                  </span>
+                  <p className="text-sm text-muted">
+                    <T k={`gender.${r.gender_policy}`} />
+                  </p>
                 </div>
                 <div className="flex items-center gap-2 self-start sm:flex-col sm:items-end sm:self-center">
                   <KeyTag label={r.room_number} />
-                  <span
-                    className={`rounded px-2 py-0.5 text-xs font-medium ${STATUS_CLASS[r.availability]}`}
-                  >
-                    {STATUS_LABEL[r.availability]}
-                  </span>
+                  <StatusBadge status={r.availability} />
                 </div>
               </li>
             ))}
