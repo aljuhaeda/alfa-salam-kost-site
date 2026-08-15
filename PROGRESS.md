@@ -3,10 +3,33 @@
 ## Status
 `/rooms` and `/rukost` working end-to-end against the live Supabase
 backend. `/about` and `/contact` now have real copy (2026-08-13) — no
-more placeholders. **Deployed to Vercel (2026-08-12)**:
-https://alfa-salam-kost-site.vercel.app, browser-verified — `/rooms`
-renders live per-room availability matching Supabase data. Team:
-`aljuhaeda`.
+more placeholders. Homepage reworked into a short landing page with
+theme + language toggles (2026-08-15). **Deployed to Vercel
+(2026-08-12)**: https://alfa-salam-kost-site.vercel.app,
+browser-verified. Team: `aljuhaeda`.
+
+## Done — homepage rework, theme + language toggle (2026-08-15)
+- Theme toggle (light/dark via a `.dark` class, no flash-of-wrong-theme
+  — set before first paint by an inline script) and language toggle
+  (Indonesian/English only, `src/app/i18n.tsx` — flat dictionaries, no
+  library) added site-wide. Built by an Opus 5 subagent, browser-verified
+  in both themes/languages, pushed.
+- Homepage rewritten from a stub into a short landing page (routes out
+  to `/rooms`, `/about`, `/contact` rather than absorbing their
+  content): hero, live availability count pulled from `public_rooms()`,
+  and a facilities teaser pulling from the same `about.fac.*` strings
+  used on `/about`.
+- Iterated on decoration (blurred animated background orbs, dot-grid
+  texture) after user feedback across several rounds — removed an
+  unsubstantiated "No. 1" ranking badge, fixed a hard seam where the
+  background cut off partway down the page, fixed a real bug where
+  `list-disc` markers misaligned across the two-column facilities grid,
+  fixed a marigold glow sitting behind hero text (invalidated the
+  documented `--muted` contrast ratio), added a bordered stat block and
+  a third background glow. Design iteration was run past an Opus 5
+  subagent for a second opinion before implementing. Build clean,
+  browser-verified in both themes, pushed to `origin/master`
+  (`f066cbe`).
 
 ## Done — real About/Contact copy + Google Maps link (2026-08-13)
 Replaced all `[FILL IN]` markers with real business details from the
