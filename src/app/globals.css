@@ -66,25 +66,21 @@ body {
   border-top: 1px dashed var(--rattan);
 }
 
-/* Two soft, blurred colour fields on the homepage -- purely decorative,
+/* Three soft, blurred colour fields on the homepage -- purely decorative,
    scoped to .bg-orbs so it never leaks onto other pages. The container is
-   full-page height (`flex-1` in page.tsx), so these are positioned and
-   faded in viewport units, not % of the container -- % would put them
-   further away, or make the fade point drift, on every content-length
-   change. */
-.bg-orbs {
-  mask-image: linear-gradient(to bottom, black, transparent 130vh);
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent 130vh);
-}
+   sized to its content (not full-page height), so these are positioned and
+   faded in % of the container -- it's the natural unit here since there's
+   no leftover viewport space to account for. */
 .bg-orbs::before,
-.bg-orbs::after {
+.bg-orbs::after,
+.bg-orbs .bg-orb-clay {
   content: "";
   position: absolute;
   border-radius: 9999px;
   filter: blur(70px);
 }
 .bg-orbs::before {
-  top: -15vh;
+  top: -15%;
   right: -10vw;
   width: 40vw;
   aspect-ratio: 1;
@@ -92,12 +88,23 @@ body {
   opacity: 0.14;
 }
 .bg-orbs::after {
-  top: 45vh;
-  left: -12vw;
-  width: 36vw;
+  /* Kept clear of the hero text column (max-w-2xl, left-aligned) so it
+     doesn't sit under body copy -- globals' --muted contrast figure only
+     holds against the flat --background, not a tinted glow. */
+  top: 30%;
+  left: -20vw;
+  width: 30vw;
   aspect-ratio: 1;
   background: var(--marigold);
-  opacity: 0.12;
+  opacity: 0.08;
+}
+.bg-orbs .bg-orb-clay {
+  bottom: -10%;
+  right: -8vw;
+  width: 34vw;
+  aspect-ratio: 1;
+  background: var(--clay);
+  opacity: 0.1;
 }
 @media (prefers-reduced-motion: no-preference) {
   .bg-orbs::before {
@@ -135,4 +142,25 @@ body {
     transparent 1px
   );
   background-size: 24px 24px;
+  /* Fades the texture out toward the bottom edge instead of ending in a
+     hard cut, so the transition to the plain body background is smooth
+     regardless of exactly how tall the content is. */
+  mask-image: linear-gradient(to bottom, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent);
+}
+
+/* Custom facility bullet: list-disc on a grid <li> renders the marker
+   outside the padding box, misaligning across the two-column grid. */
+.facility-bullet {
+  position: relative;
+}
+.facility-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--marigold);
 }

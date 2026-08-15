@@ -32,8 +32,10 @@ export default async function Home() {
   ).length;
 
   return (
-    <div className="bg-dots relative isolate flex flex-1 flex-col overflow-hidden">
-      <div className="bg-orbs pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
+    <div className="bg-dots relative isolate overflow-hidden">
+      <div className="bg-orbs pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <div className="bg-orb-clay" />
+      </div>
       <div className="relative mx-auto flex w-full max-w-2xl flex-col gap-6 px-6 py-12 sm:py-16">
         <h1 className="font-display text-4xl leading-tight font-medium text-balance sm:text-5xl">
           <T k="home.title" />
@@ -57,10 +59,10 @@ export default async function Home() {
         </div>
 
         {kostRooms.length > 0 && (
-          <p className="string-divider pt-8 font-mono text-sm">
-            <span className="text-2xl font-medium text-teratai">
+          <p className="mt-8 flex items-center gap-3 rounded-lg border border-rattan px-4 py-3 font-mono text-sm">
+            <span className="text-3xl font-medium text-teratai">
               {availableCount}
-            </span>{" "}
+            </span>
             <T k="home.available" />
           </p>
         )}
@@ -69,9 +71,9 @@ export default async function Home() {
           <h2 className="font-display text-xl font-medium">
             <T k="about.facilities" />
           </h2>
-          <ul className="grid grid-cols-1 gap-x-6 gap-y-1 text-muted sm:grid-cols-2">
+          <ul className="grid grid-cols-1 items-start gap-x-6 gap-y-1 text-muted sm:grid-cols-2">
             {FACILITIES.map((k) => (
-              <li key={k} className="list-disc pl-5">
+              <li key={k} className="facility-bullet pl-4">
                 <T k={k} />
               </li>
             ))}
