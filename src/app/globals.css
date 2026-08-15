@@ -66,13 +66,15 @@ body {
   border-top: 1px dashed var(--rattan);
 }
 
-/* Two soft, blurred colour fields behind the homepage hero -- purely
-   decorative, scoped to .bg-orbs so it never leaks onto other pages.
-   Masked to fade out before the container's bottom edge, otherwise the
-   overflow-hidden clip reads as a hard horizontal line. */
+/* Two soft, blurred colour fields on the homepage -- purely decorative,
+   scoped to .bg-orbs so it never leaks onto other pages. The container is
+   full-page height (`flex-1` in page.tsx), so these are positioned and
+   faded in viewport units, not % of the container -- % would put them
+   further away, or make the fade point drift, on every content-length
+   change. */
 .bg-orbs {
-  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black, transparent 130vh);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 130vh);
 }
 .bg-orbs::before,
 .bg-orbs::after {
@@ -82,17 +84,17 @@ body {
   filter: blur(70px);
 }
 .bg-orbs::before {
-  top: -15%;
-  right: -10%;
-  width: 45%;
+  top: -15vh;
+  right: -10vw;
+  width: 40vw;
   aspect-ratio: 1;
   background: var(--teratai);
   opacity: 0.14;
 }
 .bg-orbs::after {
-  bottom: -20%;
-  left: -12%;
-  width: 40%;
+  top: 45vh;
+  left: -12vw;
+  width: 36vw;
   aspect-ratio: 1;
   background: var(--marigold);
   opacity: 0.12;
@@ -133,19 +135,4 @@ body {
     transparent 1px
   );
   background-size: 24px 24px;
-}
-
-/* A third, smaller glow for the facilities section, so the page has a
-   second beat of colour instead of all the decoration living in the hero. */
-.bg-orb-clay::before {
-  content: "";
-  position: absolute;
-  top: -10%;
-  right: 5%;
-  width: 28%;
-  aspect-ratio: 1;
-  border-radius: 9999px;
-  background: var(--clay);
-  opacity: 0.1;
-  filter: blur(60px);
 }
