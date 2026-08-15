@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
+import KeyTag from "./key-tag";
 import T, { type Key } from "./i18n";
 
 export const revalidate = 60;
@@ -32,9 +33,10 @@ export default async function Home() {
   ).length;
 
   return (
-    <div className="relative isolate overflow-hidden">
+    <div className="bg-dots relative isolate overflow-hidden">
       <div className="bg-orbs pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
       <div className="relative mx-auto flex w-full max-w-2xl flex-col gap-6 px-6 py-12 sm:py-16">
+        <KeyTag label="Cibinong, Bogor" />
         <h1 className="font-display text-4xl leading-tight font-medium text-balance sm:text-5xl">
           <T k="home.title" />
         </h1>
@@ -65,7 +67,11 @@ export default async function Home() {
           </p>
         )}
 
-        <section className="string-divider flex flex-col gap-3 pt-8">
+        <section className="string-divider relative flex flex-col gap-3 overflow-hidden pt-8">
+          <div
+            className="bg-orb-clay pointer-events-none absolute inset-0 -z-10"
+            aria-hidden="true"
+          />
           <h2 className="font-display text-xl font-medium">
             <T k="about.facilities" />
           </h2>

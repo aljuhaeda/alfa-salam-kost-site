@@ -123,3 +123,29 @@ body {
     transform: translate(4%, -3%) scale(1.05);
   }
 }
+
+/* Faint dot grid -- the "Paper" background gets a hint of texture instead
+   of reading as a flat fill. color-mix bakes the fade into the dot colour
+   itself; a plain `opacity` on this element would also fade its children. */
+.bg-dots {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--rattan) 60%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* A third, smaller glow for the facilities section, so the page has a
+   second beat of colour instead of all the decoration living in the hero. */
+.bg-orb-clay::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: 5%;
+  width: 28%;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  background: var(--clay);
+  opacity: 0.1;
+  filter: blur(60px);
+}
