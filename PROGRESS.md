@@ -173,6 +173,11 @@ files) once the dashboard redesign is done.
   gender policy) still needs entering via the dashboard once it's live,
   or an expanded seed if the user hands over a room list.
 
+## Doc-only update (2026-08-25)
+README's homepage screenshot was refreshed (`f26976d`, 2026-08-19) — no
+app/feature change, noted here only to keep this file's last-touch after
+that commit.
+
 ## Next up
 1. Upload real room photos to the `room-photos` bucket via the dashboard
    once it's live — owner confirmed photos are coming soon (2026-08-13).
