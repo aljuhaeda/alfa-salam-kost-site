@@ -38,6 +38,12 @@ export const metadata: Metadata = {
 // choice still wins on a system set to dark.
 const THEME_SCRIPT = `(function(){try{var s=localStorage.getItem("theme");var d=s?s==="dark":matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d);var l=localStorage.getItem("lang");if(l==="en"||l==="id")document.documentElement.lang=l}catch(e){}})()`;
 
+// Adds `.anim` before first paint. Every hidden-initial motion state in
+// globals.css is scoped under `.anim`, so if JS never runs (or fails),
+// the page renders fully visible with no animation — content is never
+// trapped behind a transform that never fires.
+const ANIM_SCRIPT = `document.documentElement.classList.add("anim")`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -51,6 +57,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: ANIM_SCRIPT }} />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <a
@@ -59,11 +66,11 @@ export default function RootLayout({
         >
           <T k="a11y.skip" />
         </a>
-        <header className="sticky top-0 z-10 border-b border-line bg-background/90 backdrop-blur">
+        <header className="site-header sticky top-0 z-10 border-b border-line bg-background/90 backdrop-blur">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3">
             <Link
               href="/"
-              className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight"
+              className="press flex items-center gap-2 font-display text-lg font-semibold tracking-tight hover:opacity-80"
             >
               <Star className="h-5 w-5 text-sage" />
               Alfa Salam Kost

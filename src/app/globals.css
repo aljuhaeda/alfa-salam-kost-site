@@ -42,7 +42,9 @@
   --line: #2C332F;
   --accent: #A9C6B7;
   --sage: #6FB58C;
-  --deep: #0F1613;
+  /* Band background in dark mode — a green-tinted step ABOVE the near-black
+     page ground so the colour bands still read as distinct panels. */
+  --deep: #1F2E27;
   --positive: #57A97D;
   --negative: #D8776B;
 }
@@ -93,31 +95,223 @@ body {
   background: var(--accent);
 }
 
-/* Content settles in on load — one quiet fade-up, not a show. Ported from
-   the dashboard so the two properties feel the same. Applied to each
-   page's top wrapper. */
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
+/* ─────────────────────────────────────────────────────────────────────
+   Motion system — personality: PHYSICAL (tactile, spring-settled, has
+   weight). Three curves only:
+     --spring-snappy  entries + scroll reveals   (Apple sheet-present)
+     --spring-smooth  position / state changes
+     --ease-snap      hover + press feedback
+   Everything below uses one of these. Dep-free: CSS + one
+   IntersectionObserver (reveal.tsx). All gated on prefers-reduced-motion.
+   ───────────────────────────────────────────────────────────────────── */
+:root {
+  --spring-snappy: linear(
+    0, 0.009, 0.035 2.1%, 0.141 4.4%, 0.723 12.9%, 0.938 16.7%,
+    1.017 19.4%, 1.067 22.5%, 1.089 26%, 1.079 30.3%, 1.049 36%,
+    1.024 42.6%, 1.011 50.3%, 1.004 59.2%, 1.001 69.3%, 1
+  );
+  --spring-smooth: linear(
+    0, 0.004, 0.016 2.3%, 0.063 4.7%, 0.141 7.2%, 0.25 9.9%, 0.601 16.5%,
+    0.815 21%, 0.929 25.2%, 0.987 29%, 1.025 33.5%, 1.042 38%, 1.04 43.5%,
+    1.027 50%, 1.013 57.5%, 1.005 67%, 1.001 79%, 1
+  );
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Warm ambient wash + a felt-not-seen grain, so the flat cream ground has
+   depth. Matches the dashboard's body wash, one notch warmer. */
+body {
+  background:
+    radial-gradient(120% 80% at 15% 0%, color-mix(in srgb, var(--sage) 8%, transparent), transparent 55%),
+    var(--background);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Every hidden-initial state below is scoped under `.anim` (added to
+   <html> before paint by ANIM_SCRIPT). If JS never runs, `.anim` is
+   absent and the page renders fully visible — no content is trapped
+   behind a transform that never fires. */
+
+/* Page-load entry — staggered, --i (element index) set inline. */
+@keyframes lift-in {
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
-.rise {
-  animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+.anim .lift {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  animation: lift-in 0.7s var(--spring-snappy) forwards;
+  animation-delay: calc(80ms + var(--i, 0) * 90ms);
+}
+
+/* Hero headline — word-by-word masked rise. One signature moment. */
+.word {
+  display: inline-block;
+  vertical-align: top;
+}
+.anim .word {
+  overflow: hidden;
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+.anim .word > span {
+  display: inline-block;
+  transform: translateY(120%);
+  transition: transform 0.85s var(--spring-snappy);
+  transition-delay: calc(220ms + var(--w, 0) * 65ms);
+}
+.anim .hero-in .word > span {
+  transform: translateY(0);
+}
+
+/* Header drops in on first paint. */
+@keyframes header-in {
+  from { opacity: 0; transform: translateY(-100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim .site-header {
+  animation: header-in 0.6s var(--spring-smooth) both;
+}
+
+/* One-shot page-in for the interior routes (/rooms, /contact). */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim .rise {
+  animation: rise 0.55s var(--spring-snappy) both;
+}
+
+/* Scroll reveal — every below-fold block. reveal.tsx toggles .is-visible. */
+.anim .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition:
+    opacity 0.7s var(--spring-snappy),
+    transform 0.7s var(--spring-snappy),
+    filter 0.7s var(--spring-snappy);
+}
+.anim .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+/* Stagger children of a revealed block (chips, list items). */
+.anim .reveal [data-stagger] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.6s var(--spring-snappy),
+    transform 0.6s var(--spring-snappy);
+  transition-delay: calc(120ms + var(--s, 0) * 55ms);
+}
+.anim .reveal.is-visible [data-stagger] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Divider draws in from the centre when its block reveals. */
+.anim .rule-line {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.8s var(--spring-smooth);
+}
+.anim .reveal.is-visible .rule-line {
+  transform: scaleX(1);
+}
+
+/* Shared interactive physics. */
+.press {
+  transition:
+    transform 0.4s var(--ease-snap),
+    box-shadow 0.4s var(--ease-snap),
+    border-color 0.4s var(--ease-snap),
+    opacity 0.3s var(--ease-snap);
+}
+.press:active {
+  transform: scale(0.97);
+  transition-duration: 0.16s;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--deep) 12%, transparent);
+}
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--deep) 18%, transparent);
+}
+
+/* Animated link underline. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  transition: background-size 0.35s var(--ease-snap);
+}
+.link-underline:hover {
+  background-size: 0% 1px;
+}
+
+/* Custom facility bullet (kept from earlier). */
+.facility-bullet {
+  position: relative;
+}
+.facility-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise {
+  body::after { display: none; }
+  .anim .rise,
+  .anim .site-header,
+  .anim .lift,
+  .anim .word > span {
     animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
+  .anim .reveal,
+  .anim .reveal [data-stagger] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .anim .rule-line { transform: scaleX(1); }
+  .press:active { transform: none; }
+  .card-hover:hover,
+  .btn-hover:hover { transform: none; }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

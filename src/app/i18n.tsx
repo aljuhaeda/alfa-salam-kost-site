@@ -19,10 +19,9 @@ const id = {
   "perMonth": "/bulan",
 
   "home.eyebrow": "Cibinong, Bogor",
-  "home.title":
-    "Kamar yang siap huni, dan pemilik yang benar-benar mengangkat telepon.",
+  "home.title": "Kamar tenang, dijaga baik.",
   "home.sub":
-    "Kost khusus perempuan di dalam kompleks perumahan bergerbang. Kamar mandi dalam di setiap kamar.",
+    "Khusus perempuan, di kompleks bergerbang Cibinong. Kamar mandi dalam di tiap kamar, dan pemilik yang mengangkat telepon.",
   "home.cta": "Lihat kamar & ketersediaan",
   "home.cta2": "Hubungi kami",
 
@@ -105,10 +104,9 @@ const en: Record<keyof typeof id, string> = {
   "perMonth": "/month",
 
   "home.eyebrow": "Cibinong, Bogor",
-  "home.title":
-    "A room that's ready, and a landlady who actually answers the phone.",
+  "home.title": "A quiet room, kept well.",
   "home.sub":
-    "A women-only kost inside a gated residential complex. A private indoor bathroom in every room.",
+    "Women-only, in a gated Cibinong complex. A private bathroom in every room, and a landlady who picks up.",
   "home.cta": "See rooms & availability",
   "home.cta2": "Message us",
 

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { RUKOST_PROPERTY, rupiah } from "../config";
 import ArchFrame from "../arch";
-import StarDivider from "../star-divider";
+import Reveal from "../reveal";
+import Star from "../star";
 import StatusBadge, { type Availability } from "../status-badge";
 import T from "../i18n";
 
@@ -19,9 +20,13 @@ type PublicRoom = {
   gender_policy: "women_only" | "men_only" | "mixed";
 };
 
-function RoomCard({ r }: { r: PublicRoom }) {
+function RoomCard({ r, i }: { r: PublicRoom; i: number }) {
   return (
-    <li className="flex gap-4 rounded-xl border border-line bg-surface p-4 transition-colors hover:border-accent">
+    <li
+      data-stagger
+      style={{ "--s": Math.min(i, 8) } as React.CSSProperties}
+      className="press card-hover flex gap-4 rounded-xl border border-line bg-surface p-4"
+    >
       <ArchFrame
         src={r.photo_url}
         alt={`${r.room_type.replace("_", " ")} — ${r.room_number}`}
@@ -52,6 +57,16 @@ function RoomCard({ r }: { r: PublicRoom }) {
   );
 }
 
+function StringRule() {
+  return (
+    <div className="rule-line flex items-center gap-4">
+      <span className="h-px flex-1 bg-line" />
+      <Star className="h-3.5 w-3.5 text-sage/60" />
+      <span className="h-px flex-1 bg-line" />
+    </div>
+  );
+}
+
 export default async function RoomsPage() {
   // Calls the SECURITY DEFINER function only -- rooms/tenants tables are
   // revoked from anon at the database level. See 0001_init.sql.
@@ -70,9 +85,9 @@ export default async function RoomsPage() {
   }
 
   return (
-    <div className="rise mx-auto flex w-full max-w-3xl flex-col gap-10 px-6 py-12 sm:py-16">
+    <div className="rise mx-auto flex w-full max-w-3xl flex-col gap-14 px-6 py-12 sm:py-16">
       <div className="flex flex-col gap-3">
-        <h1 className="font-display text-3xl font-semibold sm:text-4xl">
+        <h1 className="font-display text-[clamp(2rem,5vw,3.25rem)] font-semibold tracking-[-0.02em]">
           <T k="rooms.title" />
         </h1>
         <p className="max-w-prose text-muted">
@@ -87,20 +102,24 @@ export default async function RoomsPage() {
       )}
 
       {[...byProperty.entries()].map(([property, list], i) => (
-        <section key={property} className="flex flex-col gap-4">
-          {i > 0 && <StarDivider />}
+        <Reveal
+          as="section"
+          key={property}
+          className="flex flex-col gap-4"
+        >
+          {i > 0 && <StringRule />}
           <h2 className="font-display text-xl font-semibold">{property}</h2>
           <ul className="flex flex-col gap-3">
-            {list.map((r) => (
-              <RoomCard key={r.room_number} r={r} />
+            {list.map((r, j) => (
+              <RoomCard key={r.room_number} r={r} i={j} />
             ))}
           </ul>
-        </section>
+        </Reveal>
       ))}
 
       {/* Rukost — whole-house rental, different business rule */}
-      <section id="rukost" className="flex flex-col gap-4">
-        <StarDivider />
+      <Reveal as="section" id="rukost" className="flex flex-col gap-4">
+        <StringRule />
         <h2 className="font-display text-xl font-semibold">
           <T k="rukost.title" />
         </h2>
@@ -113,18 +132,18 @@ export default async function RoomsPage() {
           </p>
         ) : (
           <ul className="flex flex-col gap-3">
-            {rukost.map((r) => (
-              <RoomCard key={r.room_number} r={r} />
+            {rukost.map((r, j) => (
+              <RoomCard key={r.room_number} r={r} i={j} />
             ))}
           </ul>
         )}
         <Link
           href="/contact"
-          className="inline-flex min-h-11 w-fit items-center rounded-md bg-accent px-5 font-medium text-surface hover:opacity-90"
+          className="press btn-hover inline-flex min-h-11 w-fit items-center rounded-full bg-accent px-7 text-sm font-medium tracking-wide text-surface uppercase"
         >
           <T k="rukost.cta" />
         </Link>
-      </section>
+      </Reveal>
     </div>
   );
 }
