@@ -16,7 +16,7 @@ const ARCH_D = "M6 158 V64 C6 30 30 4 60 4 C90 4 114 30 114 64 V158 Z";
 
 const ARCH_MASK =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 158'%3E%3Cpath d='" +
-  "M6 158 V64 C6 30 30 4 60 4 C90 4 114 30 114 64 V158 Z" +
+  ARCH_D +
   "' fill='%23000'/%3E%3C/svg%3E\")";
 
 const maskStyle = {
@@ -65,7 +65,6 @@ export default function ArchFrame({
           {/* fixed cream — the gradient is always dark enough for it in
               both themes */}
           <Star className="absolute top-1/2 left-1/2 w-1/4 -translate-x-1/2 -translate-y-1/2 text-[#F7F4EF] opacity-80" />
-          <span className="sr-only">{alt}</span>
         </div>
       )}
       {/* Outline sits on top; a viewBox SVG scales correctly. */}

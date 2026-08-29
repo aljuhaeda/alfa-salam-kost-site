@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
+import { RUKOST_PROPERTY, rupiah } from "../config";
 import ArchFrame from "../arch";
 import StarDivider from "../star-divider";
 import StatusBadge, { type Availability } from "../status-badge";
 import T from "../i18n";
 
 export const revalidate = 60;
-
-const RUKOST = "Alfa Salam Rukost";
 
 type PublicRoom = {
   property_name: string;
@@ -36,7 +35,7 @@ function RoomCard({ r }: { r: PublicRoom }) {
           <T k="rooms.room" /> {r.room_number}
         </h3>
         <p className="font-mono text-sm">
-          Rp{r.rent_price.toLocaleString("id-ID")}
+          {rupiah(r.rent_price)}
           <T k="perMonth" />
         </p>
         {r.description && (
@@ -60,8 +59,8 @@ export default async function RoomsPage() {
   if (error) throw new Error(error.message);
 
   const rooms = (data ?? []) as PublicRoom[];
-  const kost = rooms.filter((r) => r.property_name !== RUKOST);
-  const rukost = rooms.filter((r) => r.property_name === RUKOST);
+  const kost = rooms.filter((r) => r.property_name !== RUKOST_PROPERTY);
+  const rukost = rooms.filter((r) => r.property_name === RUKOST_PROPERTY);
 
   const byProperty = new Map<string, PublicRoom[]>();
   for (const r of kost) {

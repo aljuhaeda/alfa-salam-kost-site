@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
-import { MAPS_URL } from "./config";
+import { MAPS_URL, RUKOST_PROPERTY, rupiah } from "./config";
 import ArchFrame from "./arch";
 import Star from "./star";
 import StarDivider from "./star-divider";
@@ -26,14 +26,12 @@ const FACILITIES: Key[] = [
   "about.fac.8",
 ];
 
-const rupiah = (n: number) => `Rp${n.toLocaleString("id-ID")}`;
-
 export default async function Home() {
   // Front door: a Supabase blip should drop the availability band, not
   // take the whole homepage down. See rooms/page.tsx for the strict version.
   const { data } = await supabase.rpc("public_rooms");
   const kostRooms = ((data ?? []) as PublicRoom[]).filter(
-    (r) => r.property_name !== "Alfa Salam Rukost"
+    (r) => r.property_name !== RUKOST_PROPERTY
   );
   const available = kostRooms.filter((r) => r.availability === "available");
   const fromPrice = kostRooms.length
@@ -74,7 +72,7 @@ export default async function Home() {
           alt="Alfa Salam Kost"
           sizes="(min-width: 640px) 160px, 55vw"
           priority
-          className="w-40 justify-self-center sm:w-40"
+          className="w-40 justify-self-center"
         />
       </section>
 
