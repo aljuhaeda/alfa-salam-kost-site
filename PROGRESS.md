@@ -1,12 +1,18 @@
 # Alfa Salam Kost Site — Progress
 
 ## Status
-Full redesign ("Rumah × Pelita") built on branch `site-redesign` —
-brand shared with the dashboard, new IA (3 routes), new copy. Build /
-lint / tsc clean, browser-verified both themes + both languages against
-live Supabase. **Not yet merged or deployed** — waiting on `PUSH_OK=1`.
-Deployed production is still the 2026-08-15 landing page at
-https://alfa-salam-kost-site.vercel.app. Team: `aljuhaeda`.
+**Full redesign ("Rumah × Pelita") + Awwwards motion pass shipped
+2026-08-29.** Merged to `master` (`--no-ff`, `1a01ef5`), pushed,
+Vercel auto-deployed. Verified live on both
+https://alfa-salam-kost-site.vercel.app and
+https://alfasalamkost.aljuhaeda.com — new hero markup served, 3 routes
+200, `/about`→`/` and `/rukost`→`/rooms#rukost` redirects live, `/rooms`
+shows live Supabase data. Team: `aljuhaeda`.
+
+Not yet checked on the live site: the running motion / 60fps / mobile
+~375px, and `ArchFrame` with a real photo (bucket still empty). The
+agent's automation browser runs `visibilityState:hidden` so it can't
+observe animation — needs a human on a real device.
 
 ## Done — header rework + ambient motion (2026-08-29, branch `site-redesign`)
 - **Header** is now `header.tsx` (client), scroll-aware: transparent and
@@ -258,18 +264,14 @@ app/feature change, noted here only to keep this file's last-touch after
 that commit.
 
 ## Next up
-1. **Merge `site-redesign` → `master` + deploy** (needs `PUSH_OK=1`).
-   Deploy-linked repo — push ships live to Vercel. After deploy,
-   browser-verify the live URL (both themes/langs, `/rooms` data,
-   redirects) and refresh the README screenshot.
+1. **Human check on the live site** (agent can't — throttled browser):
+   the motion feel / 60fps, the scroll-aware header transition, the slow
+   star rotation, and mobile ~375px. Refresh the README screenshot.
 2. Upload real room photos to the `room-photos` bucket via the dashboard
    once it's live — owner confirmed photos are coming soon (2026-08-13).
    Once one is in, confirm `ArchFrame` clips a real photo to the arch
    with no layout shift (only tested with the placeholder so far).
 3. Replace the 23 placeholder rooms (1–12, 12a, 12b, 14–22) with real
    room numbers/types/rent via the dashboard, once the owner has the
-   list. The `/rooms` page is 23 near-identical placeholder cards until
+   list. The `/rooms` page is ~23 near-identical placeholder cards until
    then — long, but that's the data, not the design.
-4. Mobile (~375px) not visually confirmed this session — the redesign
-   uses standard responsive patterns (`sm:` breakpoints, `flex-wrap`,
-   `min-w-0`), but eyeball it on a real phone after deploy.
