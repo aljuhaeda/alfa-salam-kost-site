@@ -6,9 +6,7 @@ import T, { type Key } from "./i18n";
 
 const NAV: { href: string; k: Key }[] = [
   { href: "/", k: "nav.home" },
-  { href: "/about", k: "nav.about" },
   { href: "/rooms", k: "nav.rooms" },
-  { href: "/rukost", k: "nav.rukost" },
   { href: "/contact", k: "nav.contact" },
 ];
 
@@ -30,8 +28,8 @@ export default function NavLinks({ className = "" }: { className?: string }) {
             aria-current={active ? "page" : undefined}
             className={`flex min-h-9 items-center rounded-md border-b-2 px-2 whitespace-nowrap ${
               active
-                ? "border-teratai font-medium text-teratai"
-                : "border-transparent text-muted hover:border-rattan hover:text-foreground"
+                ? "border-accent font-medium text-accent"
+                : "border-transparent text-muted hover:border-line hover:text-foreground"
             }`}
           >
             <T k={item.k} />

@@ -18,7 +18,7 @@ export default function ThemeToggle() {
         } catch {}
       }}
       aria-label={t("a11y.theme")}
-      className="flex h-9 w-9 items-center justify-center rounded-md border border-rattan hover:border-teratai hover:text-teratai"
+      className="flex h-9 w-9 items-center justify-center rounded-md border border-line hover:border-accent hover:text-accent"
     >
       {/* moon — shown in light mode (click to go dark) */}
       <svg

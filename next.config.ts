@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // The redesign folded /about into the homepage and /rukost into /rooms.
+  // Keep old links (and the portfolio case study) alive.
+  async redirects() {
+    return [
+      { source: "/about", destination: "/", permanent: true },
+      { source: "/rukost", destination: "/rooms#rukost", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
