@@ -8,6 +8,16 @@ live Supabase. **Not yet merged or deployed** — waiting on `PUSH_OK=1`.
 Deployed production is still the 2026-08-15 landing page at
 https://alfa-salam-kost-site.vercel.app. Team: `aljuhaeda`.
 
+## Done — header rework + ambient motion (2026-08-29, branch `site-redesign`)
+- **Header** is now `header.tsx` (client), scroll-aware: transparent and
+  borderless over the page at the top, becomes a frosted panel
+  (translucent ground + hairline + shadow + backdrop-blur) once you
+  scroll past a 1px sentinel (IntersectionObserver, no scroll listener).
+- **Ambient:** the 8-point star turns slowly (1 rev / 40s) where it
+  stands as a mark — brand lockup + hero arch centre only. A soft sage
+  glow behind the hero arch slowly breathes (9s). Both `.anim`-gated and
+  killed by `prefers-reduced-motion`.
+
 ## Done — Awwwards motion pass (2026-08-29, branch `site-redesign`)
 User took full creative command ("do as you like") and asked for real
 award-tier impact. Kept the brand (shared with the live dashboard) but
