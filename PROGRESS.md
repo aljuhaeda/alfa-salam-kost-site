@@ -8,6 +8,35 @@ live Supabase. **Not yet merged or deployed** — waiting on `PUSH_OK=1`.
 Deployed production is still the 2026-08-15 landing page at
 https://alfa-salam-kost-site.vercel.app. Team: `aljuhaeda`.
 
+## Done — Awwwards motion pass (2026-08-29, branch `site-redesign`)
+User took full creative command ("do as you like") and asked for real
+award-tier impact. Kept the brand (shared with the live dashboard) but
+raised the execution:
+- **Hero rebuilt** (`hero.tsx`, client) as an asymmetric split —
+  viewport-scale Figtree headline (`clamp` to 6rem, tight tracking), the
+  mihrab arch as a tall architectural element on the right. One signature
+  move: the headline rises word-by-word out of a mask. Shorter hero copy
+  ("Kamar tenang, dijaga baik." / "A quiet room, kept well.").
+- **Motion system** in `globals.css` — personality PHYSICAL, exactly
+  three curves (`--spring-snappy` / `--spring-smooth` / `--ease-snap`,
+  verified by grep). Staggered page-load entry (`.lift`), scroll reveals
+  on every below-fold block (`reveal.tsx`, IntersectionObserver),
+  count-up on the availability figure (`count-up.tsx`), divider draw-in,
+  card lift + universal press physics, animated link underlines, header
+  drop-in. Warm radial wash + faint grain.
+- **Dep-free** — CSS + IntersectionObserver + rAF, no framer-motion.
+- **Robust**: every hidden-initial state scoped under `.anim` (added to
+  `<html>` pre-paint by `ANIM_SCRIPT`), so with no JS the page renders
+  fully visible — content is never trapped behind a transform. All
+  motion gated on `prefers-reduced-motion`.
+- Dark-mode `--deep` lightened to `#1F2E27` so the colour bands stay
+  distinct panels (were near-invisible against the near-black ground).
+- Build / lint / tsc clean. Resting states browser-verified light + dark.
+  **Motion itself is NOT yet verified by the agent** — the automation
+  Chrome tab runs as `visibilityState: hidden`, which freezes rAF and the
+  animation timeline (transitions start then freeze mid-flight). Needs a
+  real foreground browser to confirm the feel / 60fps / stagger timing.
+
 ## Done — full redesign "Rumah × Pelita" (2026-08-29, branch `site-redesign`)
 Spec: `docs/superpowers/specs/2026-08-29-site-redesign-design.md`, plan:
 `docs/superpowers/plans/2026-08-29-site-redesign-plan.md`.
