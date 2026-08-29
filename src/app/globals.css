@@ -9,42 +9,57 @@
    Dark mode is opt-in via a `.dark` class on <html>, set before first
    paint by the inline script in layout.tsx. That script also resolves
    `prefers-color-scheme`, so there is deliberately no media query here —
-   one mechanism, so an explicit "light" choice always beats system dark. */
+   one mechanism, so an explicit "light" choice always beats system dark.
+
+   Palette is ported from alfa-salam-kost-dashboard's "clean & quiet"
+   redesign so the two properties read as one brand. Sampled from the
+   logo: sage #5F9179 mark, cream #F7F4EF ground, deep green on the
+   reversed lockup. --accent is that sage stepped down for AA on button
+   text; --positive is a truer green so "available" reads distinct from
+   a link. Green accent vs green positive are told apart by form: accent
+   = text links + solid buttons, positive = tinted pill only. */
 :root {
   color-scheme: light;
-  --background: #F3EEE2;
-  --foreground: #2B2620;
-  /* Pre-blended 70% foreground-on-background: 5.2:1, passes AA.
-     Replaces the old scattered opacity-60/70/80 on body copy, where
-     opacity-60 measured 3.9:1 and failed. */
-  --muted: #67625A;
-  --teratai: #3F5D4E;
-  --marigold: #D98E2F;
-  --clay: #B5573B;
-  --rattan: #C9BFA6;
+  --background: #F7F4EF;
+  --surface: #FFFFFF;
+  --foreground: #1A1D1C;
+  /* Pre-blended muted body text — AA on --background. */
+  --muted: #5B5F5A;
+  --line: #E4E0D8;
+  --accent: #3E6B54;
+  --sage: #5F9179;
+  --deep: #2F4A3E;
+  --positive: #2E7D57;
+  --negative: #B23B30;
 }
 
 .dark {
   color-scheme: dark;
-  --background: #1C1A16;
-  --foreground: #EDE6D6;
-  --muted: #AEA99C;
-  --teratai: #5B8871;
-  --marigold: #E8A83F;
-  --clay: #D06E4E;
-  --rattan: #4A4436;
+  --background: #171A18;
+  --surface: #1E2220;
+  --foreground: #E4E6E4;
+  --muted: #A6ACA6;
+  --line: #2C332F;
+  --accent: #A9C6B7;
+  --sage: #6FB58C;
+  --deep: #0F1613;
+  --positive: #57A97D;
+  --negative: #D8776B;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
-  --color-teratai: var(--teratai);
-  --color-marigold: var(--marigold);
-  --color-clay: var(--clay);
-  --color-rattan: var(--rattan);
-  --font-sans: var(--font-work-sans);
-  --font-display: var(--font-fraunces);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-sage: var(--sage);
+  --color-deep: var(--deep);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-figtree);
   --font-mono: var(--font-plex-mono);
 }
 
@@ -54,99 +69,12 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-/* The browser default outline is nearly invisible on Paper. One global
-   rule covers every link, button and toggle on the site. */
+/* The browser default outline is nearly invisible on the cream ground.
+   One global rule covers every link, button and toggle on the site. */
 :focus-visible {
-  outline: 2px solid var(--teratai);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 2px;
-}
-
-.string-divider {
-  border-top: 1px dashed var(--rattan);
-}
-
-/* Three soft, blurred colour fields on the homepage -- purely decorative,
-   scoped to .bg-orbs so it never leaks onto other pages. The container is
-   sized to its content (not full-page height), so these are positioned and
-   faded in % of the container -- it's the natural unit here since there's
-   no leftover viewport space to account for. */
-.bg-orbs::before,
-.bg-orbs::after,
-.bg-orbs .bg-orb-clay {
-  content: "";
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(70px);
-}
-.bg-orbs::before {
-  top: -15%;
-  right: -10vw;
-  width: 40vw;
-  aspect-ratio: 1;
-  background: var(--teratai);
-  opacity: 0.14;
-}
-.bg-orbs::after {
-  /* Kept clear of the hero text column (max-w-2xl, left-aligned) so it
-     doesn't sit under body copy -- globals' --muted contrast figure only
-     holds against the flat --background, not a tinted glow. */
-  top: 30%;
-  left: -20vw;
-  width: 30vw;
-  aspect-ratio: 1;
-  background: var(--marigold);
-  opacity: 0.08;
-}
-.bg-orbs .bg-orb-clay {
-  bottom: -10%;
-  right: -8vw;
-  width: 34vw;
-  aspect-ratio: 1;
-  background: var(--clay);
-  opacity: 0.1;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .bg-orbs::before {
-    animation: bg-orb-drift-a 18s ease-in-out infinite;
-  }
-  .bg-orbs::after {
-    animation: bg-orb-drift-b 22s ease-in-out infinite;
-  }
-}
-@keyframes bg-orb-drift-a {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-3%, 4%) scale(1.08);
-  }
-}
-@keyframes bg-orb-drift-b {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(4%, -3%) scale(1.05);
-  }
-}
-
-/* Faint dot grid -- the "Paper" background gets a hint of texture instead
-   of reading as a flat fill. color-mix bakes the fade into the dot colour
-   itself; a plain `opacity` on this element would also fade its children. */
-.bg-dots {
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--rattan) 60%, transparent) 1px,
-    transparent 1px
-  );
-  background-size: 24px 24px;
-  /* Fades the texture out toward the bottom edge instead of ending in a
-     hard cut, so the transition to the plain body background is smooth
-     regardless of exactly how tall the content is. */
-  mask-image: linear-gradient(to bottom, black 80%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent);
 }
 
 /* Custom facility bullet: list-disc on a grid <li> renders the marker
@@ -162,5 +90,34 @@ body {
   width: 6px;
   height: 6px;
   border-radius: 9999px;
-  background: var(--marigold);
+  background: var(--accent);
+}
+
+/* Content settles in on load — one quiet fade-up, not a show. Ported from
+   the dashboard so the two properties feel the same. Applied to each
+   page's top wrapper. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

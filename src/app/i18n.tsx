@@ -9,45 +9,54 @@ import { useCallback, useSyncExternalStore } from "react";
 
 const id = {
   "nav.home": "Beranda",
-  "nav.about": "Tentang",
   "nav.rooms": "Kamar",
-  "nav.rukost": "Sewa Rumah",
   "nav.contact": "Kontak",
   "a11y.skip": "Lompat ke konten utama",
   "a11y.theme": "Ganti mode terang/gelap",
   "a11y.lang": "Ganti bahasa ke English",
 
-  "home.title": "Alfa Salam Kost & Rukost",
+  "maps": "Lihat di Google Maps",
+  "perMonth": "/bulan",
+
+  "home.eyebrow": "Cibinong, Bogor",
+  "home.title":
+    "Kamar yang siap huni, dan pemilik yang benar-benar mengangkat telepon.",
   "home.sub":
-    "Kamar kost nyaman dan satu unit rukost, tersedia sekarang di Cibinong, Bogor.",
-  "home.cta": "Lihat ketersediaan kamar",
-  "home.available": "kamar kost tersedia sekarang",
-  "home.moreAbout": "Lihat detail lengkap →",
+    "Kost khusus perempuan di dalam kompleks perumahan bergerbang. Kamar mandi dalam di setiap kamar.",
+  "home.cta": "Lihat kamar & ketersediaan",
+  "home.cta2": "Hubungi kami",
 
-  "rooms.title": "Ketersediaan Kamar",
-  "rooms.empty": "Belum ada kamar yang terdaftar — cek lagi nanti.",
-  "rooms.room": "Kamar",
-  "rooms.noPhoto": "Tanpa foto",
-  "rooms.perMonth": "/bulan",
-  "status.available": "Tersedia",
-  "status.maintenance": "Sedang diperbaiki",
-  "status.occupied": "Terisi",
-  "gender.women_only": "Khusus perempuan",
-  "gender.men_only": "Khusus laki-laki",
-  "gender.mixed": "Campur / keluarga",
+  "home.availTitle": "Kamar kosong saat ini",
+  "home.availableLabel": "kamar kost kosong bulan ini",
+  "home.availableNone":
+    "Semua kamar kost terisi bulan ini — hubungi kami untuk masuk daftar tunggu.",
+  "home.fromPrice": "mulai dari",
+  "home.availCta": "Lihat semua kamar →",
 
-  "rukost.title": "Sewa Rumah — Alfa Salam Rukost",
-  "rukost.intro":
-    "Rumah 2 kamar tidur, disewakan sebagai satu unit utuh — pilihan untuk keluarga atau siapa pun yang ingin rumah pribadi, bukan sekadar satu kamar. Menyewa seluruh rumah terbuka untuk umum (hunian campur tidak masalah); ini berbeda dengan kamar Kost kami yang khusus perempuan.",
-  "rukost.empty": "Belum ada unit tersedia saat ini — cek lagi nanti.",
-  "rukost.cta": "Hubungi kami soal sewa rumah",
+  "home.band1Title": "Semuanya sudah ada di kamar",
+  "home.band1Body":
+    "Kasur, AC, water heater, dan kamar mandi dalam di setiap kamar. Anda cukup datang membawa koper, bukan truk pindahan.",
 
-  "about.title": "Tentang",
-  "about.location": "Lokasi",
-  "about.location.body":
+  "home.facTitle": "Fasilitas",
+
+  "home.band2Title": "Khusus perempuan, dengan aturan yang jelas",
+  "home.band2Body":
+    "Alfa Salam Kost khusus perempuan, jadi tamu laki-laki tidak diperbolehkan melewati pintu masuk atau masuk ke kamar. Selebihnya: jadilah tetangga yang baik, jaga kebersihan ruang bersama, dan jangan macam-macam.",
+
+  "home.hoodTitle": "Lingkungan",
+  "home.hoodBody":
     "Perumahan Andhika Residence, Jl. Nurul Yaqin No. B8, Tengah, Kec. Cibinong, Kabupaten Bogor, Jawa Barat — jalan perumahan yang tenang, hanya beberapa menit dari GOR Pakansari dan pusat belanja serta kuliner Cibinong.",
-  "about.maps": "Lihat di Google Maps",
-  "about.facilities": "Fasilitas",
+
+  "home.rukostTitle": "Mau satu rumah utuh?",
+  "home.rukostBody":
+    "Alfa Salam Rukost di sebelah disewakan sebagai satu unit — hunian campur, cocok untuk keluarga. Berbeda dari kamar Kost yang khusus perempuan.",
+  "home.rukostLink": "Lihat Rukost →",
+
+  "home.closeTitle": "Datang dan lihat langsung.",
+  "home.closeBody":
+    "Kirim pesan ke Bu Atin di WhatsApp untuk mengatur waktu berkunjung atau menanyakan kamar.",
+  "home.closeCta": "Hubungi kami di WhatsApp",
+
   "about.fac.1": "Kasur, lemari, AC, water heater, dan (di sebagian besar kamar) meja",
   "about.fac.2": "Kamar mandi dalam di setiap kamar",
   "about.fac.3": "CCTV di seluruh area kost",
@@ -56,14 +65,28 @@ const id = {
   "about.fac.6": "Lahan parkir depan",
   "about.fac.7": "Dua dapur bersama",
   "about.fac.8": "Area jemuran khusus",
-  "about.rules": "Aturan rumah",
-  "about.rules.body":
-    "Alfa Salam Kost khusus perempuan, jadi tamu laki-laki tidak diperbolehkan melewati pintu masuk atau masuk ke kamar. Selebihnya: jadilah tetangga yang baik, jaga kebersihan ruang bersama, dan jangan macam-macam.",
-  "about.blurbTitle": "Tentang Alfa Salam Kost & Rukost",
-  "about.blurb":
-    "Kost khusus perempuan di dalam kompleks perumahan bergerbang di Cibinong, dibuat untuk penghuni yang ingin kamar terkunci sendiri, kamar mandi sendiri, dan pemilik yang benar-benar mengangkat telepon. Setiap kamar sudah lengkap — kasur, AC, water heater, kamar mandi dalam — jadi Anda bisa pindah cukup dengan koper, bukan truk. CCTV dan akses satu pintu menjaga keamanan, dan lokasinya yang beberapa menit dari GOR Pakansari serta pusat kota Cibinong membuat urusan sehari-hari, olahraga, dan makan selalu dekat. Ingin satu rumah utuh? Alfa Salam Rukost di sebelah disewakan sebagai satu unit, hunian campur, untuk keluarga atau rombongan.",
+
+  "rooms.title": "Ketersediaan Kamar",
+  "rooms.intro":
+    "Status diperbarui langsung dari sistem pengelolaan kami. Lihat kamar yang kosong, lalu hubungi kami untuk memesan.",
+  "rooms.empty": "Belum ada kamar yang terdaftar — cek lagi nanti.",
+  "rooms.room": "Kamar",
+  "status.available": "Tersedia",
+  "status.maintenance": "Sedang diperbaiki",
+  "status.occupied": "Terisi",
+  "gender.women_only": "Khusus perempuan",
+  "gender.men_only": "Khusus laki-laki",
+  "gender.mixed": "Campur / keluarga",
+
+  "rukost.title": "Sewa Satu Rumah — Alfa Salam Rukost",
+  "rukost.intro":
+    "Rumah 2 kamar tidur, disewakan sebagai satu unit utuh — pilihan untuk keluarga atau siapa pun yang ingin rumah pribadi, bukan sekadar satu kamar. Menyewa seluruh rumah terbuka untuk umum (hunian campur tidak masalah); ini berbeda dengan kamar Kost kami yang khusus perempuan.",
+  "rukost.empty": "Belum ada unit tersedia saat ini — cek lagi nanti.",
+  "rukost.cta": "Hubungi kami soal sewa rumah",
 
   "contact.title": "Kontak",
+  "contact.intro":
+    "Cara tercepat adalah WhatsApp — biasanya dibalas di hari yang sama.",
   "contact.whatsapp": "WhatsApp",
   "contact.address": "Alamat",
   "contact.address.body":
@@ -72,45 +95,54 @@ const id = {
 
 const en: Record<keyof typeof id, string> = {
   "nav.home": "Home",
-  "nav.about": "About",
   "nav.rooms": "Rooms",
-  "nav.rukost": "Rent a House",
   "nav.contact": "Contact",
   "a11y.skip": "Skip to main content",
   "a11y.theme": "Toggle light/dark mode",
   "a11y.lang": "Ganti bahasa ke Bahasa Indonesia",
 
-  "home.title": "Alfa Salam Kost & Rukost",
+  "maps": "View on Google Maps",
+  "perMonth": "/month",
+
+  "home.eyebrow": "Cibinong, Bogor",
+  "home.title":
+    "A room that's ready, and a landlady who actually answers the phone.",
   "home.sub":
-    "Comfortable boarding rooms and a rukost unit, available now in Cibinong, Bogor.",
-  "home.cta": "See room availability",
-  "home.available": "kost rooms available now",
-  "home.moreAbout": "See full details →",
+    "A women-only kost inside a gated residential complex. A private indoor bathroom in every room.",
+  "home.cta": "See rooms & availability",
+  "home.cta2": "Message us",
 
-  "rooms.title": "Room Availability",
-  "rooms.empty": "No rooms listed right now — check back soon.",
-  "rooms.room": "Room",
-  "rooms.noPhoto": "No photo",
-  "rooms.perMonth": "/month",
-  "status.available": "Available",
-  "status.maintenance": "Under maintenance",
-  "status.occupied": "Occupied",
-  "gender.women_only": "Women only",
-  "gender.men_only": "Men only",
-  "gender.mixed": "Mixed / family",
+  "home.availTitle": "Free right now",
+  "home.availableLabel": "kost rooms free this month",
+  "home.availableNone":
+    "Every kost room is taken this month — message us to join the waiting list.",
+  "home.fromPrice": "from",
+  "home.availCta": "See all rooms →",
 
-  "rukost.title": "Rent a House — Alfa Salam Rukost",
-  "rukost.intro":
-    "A 2-bedroom house, rented as a whole unit — an option for families or anyone wanting a private house instead of a single room. Renting the whole house is open to anyone (mixed occupancy is fine); this is different from our women-only Kost rooms.",
-  "rukost.empty": "No listing available right now — check back soon.",
-  "rukost.cta": "Contact us about renting the house",
+  "home.band1Title": "Everything's already in the room",
+  "home.band1Body":
+    "Bed, AC, water heater, and a private indoor bathroom in every room. Move in with a suitcase, not a truck.",
 
-  "about.title": "About",
-  "about.location": "Location",
-  "about.location.body":
-    "Perumahan Andhika Residence, Jl. Nurul Yaqin No. B8, Tengah, Kec. Cibinong, Kabupaten Bogor, Jawa Barat — a quiet residential street just minutes from GOR Pakansari and Cibinong's main shopping/dining strip.",
-  "about.maps": "View on Google Maps",
-  "about.facilities": "Facilities",
+  "home.facTitle": "Facilities",
+
+  "home.band2Title": "Women-only, with house rules that are actually clear",
+  "home.band2Body":
+    "Alfa Salam Kost is women-only, so male guests aren't allowed past the entrance or in the rooms. Beyond that: be a good neighbour, keep shared spaces clean, and no funny business.",
+
+  "home.hoodTitle": "The neighbourhood",
+  "home.hoodBody":
+    "Perumahan Andhika Residence, Jl. Nurul Yaqin No. B8, Tengah, Kec. Cibinong, Kabupaten Bogor, Jawa Barat — a quiet residential street just minutes from GOR Pakansari and Cibinong's main shopping and dining strip.",
+
+  "home.rukostTitle": "Want the whole house instead?",
+  "home.rukostBody":
+    "Alfa Salam Rukost next door rents as a single unit — mixed-occupancy, good for families. Different from the women-only Kost rooms.",
+  "home.rukostLink": "See the Rukost →",
+
+  "home.closeTitle": "Come and see it.",
+  "home.closeBody":
+    "Message Bu Atin on WhatsApp to arrange a visit or ask about a room.",
+  "home.closeCta": "Contact us on WhatsApp",
+
   "about.fac.1": "Bed, drawer, AC, water heater, and (in most rooms) a table",
   "about.fac.2": "Private indoor bathroom in every room",
   "about.fac.3": "CCTV coverage around the whole kost",
@@ -119,14 +151,27 @@ const en: Record<keyof typeof id, string> = {
   "about.fac.6": "Front parking lot",
   "about.fac.7": "Two shared kitchens",
   "about.fac.8": "Dedicated drying area (jemuran) for laundry",
-  "about.rules": "House rules",
-  "about.rules.body":
-    "Alfa Salam Kost is women-only, so male guests aren't allowed past the entrance or in the rooms. Beyond that: be a good neighbor, keep shared spaces clean, and no funny business.",
-  "about.blurbTitle": "About Alfa Salam Kost & Rukost",
-  "about.blurb":
-    "A women-only kost in a gated Cibinong residential complex, built for tenants who want their own locked room, their own bathroom, and a landlady who actually answers the phone. Every room comes fully equipped — bed, AC, water heater, private bath — so you can move in with a suitcase, not a truck. CCTV and single-entry access keep the place secure, and being minutes from GOR Pakansari and Cibinong's main strip means errands, gym, and food are never far. Want the whole house instead? Alfa Salam Rukost next door rents as a single unit, mixed-occupancy, for families or groups.",
+
+  "rooms.title": "Room Availability",
+  "rooms.intro":
+    "Status is live from our management system. See what's open, then message us to book.",
+  "rooms.empty": "No rooms listed right now — check back soon.",
+  "rooms.room": "Room",
+  "status.available": "Available",
+  "status.maintenance": "Under maintenance",
+  "status.occupied": "Occupied",
+  "gender.women_only": "Women only",
+  "gender.men_only": "Men only",
+  "gender.mixed": "Mixed / family",
+
+  "rukost.title": "Rent the Whole House — Alfa Salam Rukost",
+  "rukost.intro":
+    "A 2-bedroom house, rented as a whole unit — an option for families or anyone wanting a private house instead of a single room. Renting the whole house is open to anyone (mixed occupancy is fine); this is different from our women-only Kost rooms.",
+  "rukost.empty": "No listing available right now — check back soon.",
+  "rukost.cta": "Contact us about renting the house",
 
   "contact.title": "Contact",
+  "contact.intro": "WhatsApp is fastest — usually answered the same day.",
   "contact.whatsapp": "WhatsApp",
   "contact.address": "Address",
   "contact.address.body":
@@ -204,7 +249,7 @@ export function LangToggle() {
       type="button"
       onClick={() => setLang(lang === "id" ? "en" : "id")}
       aria-label={t("a11y.lang")}
-      className="flex h-9 min-w-11 items-center justify-center rounded-md border border-rattan px-2 font-mono text-xs font-medium tracking-wide uppercase hover:border-teratai hover:text-teratai"
+      className="flex h-9 min-w-11 items-center justify-center rounded-md border border-line px-2 font-mono text-xs font-medium tracking-wide uppercase hover:border-accent hover:text-accent"
     >
       {lang === "id" ? "EN" : "ID"}
     </button>
