@@ -179,8 +179,19 @@ app/feature change, noted here only to keep this file's last-touch after
 that commit.
 
 ## Next up
-1. Upload real room photos to the `room-photos` bucket via the dashboard
+1. **Public site rework** (queued 2026-08-29). The dashboard just went
+   through a full "clean & quiet" redesign — light palette sampled from
+   the new logo (`C:\dev\Alfa Salam Kost Logo\`: mihrab arch + 8-point
+   star, sage `#5F9179` / cream `#F7F4EF`), Figtree display font, real
+   brand assets, restructured pages. The public site is the deliberate
+   light-primary counterpart and hasn't had a matching pass. Rework it to
+   share the brand identity (logo, palette, type, the arch/star motif)
+   while keeping its own public-facing character — hero, `/rooms`,
+   `/rukost`, `/about`, `/contact`. Start with `brainstorming`; the
+   dashboard specs under `../alfa-salam-kost-dashboard/docs/superpowers/
+   specs/2026-08-29-*` are the reference for the visual system.
+2. Upload real room photos to the `room-photos` bucket via the dashboard
    once it's live — owner confirmed photos are coming soon (2026-08-13).
-2. Replace the 23 placeholder rooms (1–12, 12a, 12b, 14–22) with real
+3. Replace the 23 placeholder rooms (1–12, 12a, 12b, 14–22) with real
    room numbers/types/rent via the dashboard, once the owner has the
    list.
