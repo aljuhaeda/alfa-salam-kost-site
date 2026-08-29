@@ -177,13 +177,64 @@ body::after {
   transform: translateY(0);
 }
 
-/* Header drops in on first paint. */
+/* Header — drops in on first paint, then goes scroll-aware: bare over the
+   page at the top, frosted panel once you scroll (header.tsx toggles
+   data-scrolled). */
 @keyframes header-in {
   from { opacity: 0; transform: translateY(-100%); }
   to { opacity: 1; transform: translateY(0); }
 }
+.site-header {
+  background: transparent;
+  border-color: transparent;
+  transition:
+    background-color 0.4s var(--ease-snap),
+    border-color 0.4s var(--ease-snap),
+    box-shadow 0.4s var(--ease-snap),
+    backdrop-filter 0.4s var(--ease-snap);
+}
+.site-header[data-scrolled="true"] {
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  border-color: var(--line);
+  box-shadow: 0 1px 20px color-mix(in srgb, var(--deep) 6%, transparent);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+}
 .anim .site-header {
   animation: header-in 0.6s var(--spring-smooth) both;
+}
+
+/* The 8-point star turns very slowly where it sits as a standalone mark
+   (brand lockup, hero arch). Ambient, not a spinner — one turn every ~40s.
+   Structural stars (dividers, band headers) stay put. */
+@keyframes star-turn {
+  to { transform: rotate(360deg); }
+}
+.anim .star-spin {
+  animation: star-turn 40s linear infinite;
+}
+
+/* Soft glow behind the hero arch that slowly breathes — gives the hero
+   ambient depth without any visible element. Felt, not seen. */
+.arch-glow {
+  position: absolute;
+  inset: -12% -8%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--sage) 32%, transparent),
+    transparent
+  );
+  filter: blur(48px);
+  opacity: 0.5;
+}
+.anim .arch-glow {
+  animation: arch-breathe 9s var(--spring-smooth) infinite;
+}
+@keyframes arch-breathe {
+  0%, 100% { transform: scale(0.94); opacity: 0.4; }
+  50% { transform: scale(1.06); opacity: 0.62; }
 }
 
 /* One-shot page-in for the interior routes (/rooms, /contact). */
@@ -303,6 +354,8 @@ body::after {
     transition: none;
   }
   .anim .rule-line { transform: scaleX(1); }
+  .anim .star-spin,
+  .anim .arch-glow { animation: none; }
   .press:active { transform: none; }
   .card-hover:hover,
   .btn-hover:hover { transform: none; }

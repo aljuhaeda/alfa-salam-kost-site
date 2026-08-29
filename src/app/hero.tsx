@@ -106,14 +106,16 @@ export default function Hero({
       </div>
 
       <div
-        className="lift order-first w-full max-w-[16rem] justify-self-center lg:order-none lg:max-w-none lg:justify-self-end"
+        className="lift relative isolate order-first w-full max-w-[16rem] justify-self-center lg:order-none lg:max-w-none lg:justify-self-end"
         style={{ "--i": 1 } as React.CSSProperties}
       >
+        <span className="arch-glow" aria-hidden="true" />
         <ArchFrame
           src={null}
           alt={t("home.title")}
           sizes="(min-width: 1024px) 34vw, 16rem"
           priority
+          spinStar
           className="w-full lg:w-[clamp(18rem,32vw,26rem)]"
         />
       </div>

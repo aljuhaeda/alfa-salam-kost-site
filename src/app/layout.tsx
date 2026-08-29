@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Figtree, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import NavLinks from "./nav-links";
-import ThemeToggle from "./theme-toggle";
-import Star from "./star";
-import T, { DEFAULT_LANG, LangToggle } from "./i18n";
+import Header from "./header";
+import T, { DEFAULT_LANG } from "./i18n";
 
 // Headings + the wordmark — warm geometric-humanist, close to the logo
 // lettering. Same three faces as the dashboard, for family resemblance.
@@ -66,22 +63,7 @@ export default function RootLayout({
         >
           <T k="a11y.skip" />
         </a>
-        <header className="site-header sticky top-0 z-10 border-b border-line bg-background/90 backdrop-blur">
-          <div className="mx-auto flex max-w-3xl flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3">
-            <Link
-              href="/"
-              className="press flex items-center gap-2 font-display text-lg font-semibold tracking-tight hover:opacity-80"
-            >
-              <Star className="h-5 w-5 text-sage" />
-              Alfa Salam Kost
-            </Link>
-            <NavLinks className="order-3 basis-full md:order-none md:basis-auto" />
-            <div className="order-2 ml-auto flex items-center gap-2 md:order-none">
-              <LangToggle />
-              <ThemeToggle />
-            </div>
-          </div>
-        </header>
+        <Header />
         <main id="main" className="flex flex-1 flex-col">
           {children}
         </main>

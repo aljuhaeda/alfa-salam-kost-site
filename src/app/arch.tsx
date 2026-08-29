@@ -33,12 +33,14 @@ export default function ArchFrame({
   alt,
   sizes,
   priority = false,
+  spinStar = false,
   className = "",
 }: {
   src: string | null;
   alt: string;
   sizes: string;
   priority?: boolean;
+  spinStar?: boolean;
   className?: string;
 }) {
   return (
@@ -63,8 +65,12 @@ export default function ArchFrame({
           aria-hidden="true"
         >
           {/* fixed cream — the gradient is always dark enough for it in
-              both themes */}
-          <Star className="absolute top-1/2 left-1/2 w-1/4 -translate-x-1/2 -translate-y-1/2 text-[#F7F4EF] opacity-80" />
+              both themes. Wrapper handles centring; Star itself spins. */}
+          <span className="absolute top-1/2 left-1/2 w-1/4 -translate-x-1/2 -translate-y-1/2">
+            <Star
+              className={`w-full text-[#F7F4EF] opacity-80 ${spinStar ? "star-spin" : ""}`}
+            />
+          </span>
         </div>
       )}
       {/* Outline sits on top; a viewBox SVG scales correctly. */}
