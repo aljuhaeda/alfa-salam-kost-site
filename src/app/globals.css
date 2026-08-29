@@ -122,10 +122,9 @@ body {
    depth. Matches the dashboard's body wash, one notch warmer. */
 body {
   background:
-    radial-gradient(120% 80% at 15% 0%, color-mix(in srgb, var(--sage) 8%, transparent), transparent 55%),
+    radial-gradient(120% 70% at 15% 0%, color-mix(in srgb, var(--sage) 8%, transparent), transparent 55%),
     var(--background);
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 body::after {
   content: "";
