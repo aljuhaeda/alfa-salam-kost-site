@@ -275,3 +275,7 @@ that commit.
    room numbers/types/rent via the dashboard, once the owner has the
    list. The `/rooms` page is ~23 near-identical placeholder cards until
    then — long, but that's the data, not the design.
+4. Add `LocalBusiness` JSON-LD schema + `hreflang` tags for the existing
+   ID/EN toggle — flagged 2026-08-31 during an ECC skill review as the
+   one SEO gap that actually matters for this site (a real local
+   business with a real address/phone, not a generic app).
