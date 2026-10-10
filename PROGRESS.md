@@ -263,6 +263,13 @@ README's homepage screenshot was refreshed (`f26976d`, 2026-08-19) — no
 app/feature change, noted here only to keep this file's last-touch after
 that commit.
 
+## Done — Next 16.2.12 → 16.3.8 security bump (2026-10-10)
+- Workspace audit flagged the Next advisories fixed in 16.3.x: image-optimizer
+  SSRF (GHSA-cjq9-62q9-8jv4), AVIF image-optimizer RCE (GHSA-2xp9), next/og
+  RCE, Windows-hosted RCE, cache poisoning. `npm install next@16.3.8`;
+  `npm run build` clean; `npm audit` shows `next` clean, 0 critical (remaining
+  highs are the lint-only `eslint-config-next` chain). Pushed; Vercel deploys.
+
 ## Next up
 1. **Human check on the live site** (agent can't — throttled browser):
    the motion feel / 60fps, the scroll-aware header transition, the slow
