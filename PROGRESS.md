@@ -263,6 +263,16 @@ README's homepage screenshot was refreshed (`f26976d`, 2026-08-19) — no
 app/feature change, noted here only to keep this file's last-touch after
 that commit.
 
+## Done — Next 16.3.8 → 16.4.5 security bump (2026-11-07)
+- Advisories for Next 16.0.0–16.4.0: unauth RCE in image optimizer (SVG),
+  RCE in `use cache` typed arrays, Server Actions DoS. Neither app sets
+  `dangerouslyAllowSVG` or uses `use cache`; the DoS applied. `npm install
+  next@^16.4.5` + `npm audit fix` (transitive patch bumps). `npm audit
+  --omit=dev` 0; lint/tsc/build clean (dashboard vitest 47/47); fresh-context
+  Opus review: no findings. Remaining audit: moderate, lint-only
+  (eslint-config-next 16.2.12 → minimatch). Committed; **push not yet done**
+  (auto mode denied it as a production deploy, waiting on Zul).
+
 ## Done — Next 16.2.12 → 16.3.8 security bump (2026-10-10)
 - Workspace audit flagged the Next advisories fixed in 16.3.x: image-optimizer
   SSRF (GHSA-cjq9-62q9-8jv4), AVIF image-optimizer RCE (GHSA-2xp9), next/og
